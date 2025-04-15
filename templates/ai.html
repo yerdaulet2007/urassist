@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>ИИ помощник | ЮрАссист</title>
+  
+  <!-- Подключаем основной CSS -->
+  <link rel="stylesheet" href="style.css" />
+
+  <!-- Подключаем jQuery -->
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+  <style>
+    .topbar {
+      background-color: #800000; /* Цвет фона остается красным */
+      color: white;
+      padding: 1rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .topbar h1 {
+      margin: 0;
+      font-size: 1.5rem;
+      color: white; /* Цвет текста черный */
+    }
+
+    nav ul {
+      list-style: none;
+      display: flex;
+      justify-content: center;
+      gap: 1rem;
+      padding: 0.5rem;
+    }
+
+    nav ul li {
+      border-bottom: 2px solid transparent; /* По умолчанию без подчеркивания */
+    }
+
+    nav ul li a {
+      color: white; /* Текст гиперссылок черный */
+      text-decoration: none;
+      font-weight: bold;
+      padding: 5px 0; /* Добавить отступы для эффекта обводки */
+    }
+
+    nav ul li a:hover {
+      color: white; /* Цвет текста при наведении белый */
+      border-bottom: 2px solid white; /* Белая линия под гиперссылкой */
+    }
+
+    .calculator-container {
+      max-width: 600px;
+      background: white;
+      margin: 2rem auto;
+      padding: 2rem;
+      border-radius: 10px;
+      box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+    }
+
+    .calculator-container h2 {
+      color: #800000;
+      margin-bottom: 1rem;
+    }
+
+    label {
+      display: block;
+      margin-top: 1rem;
+      font-weight: bold;
+    }
+
+    input[type="number"] {
+      width: 100%;
+      padding: 0.5rem;
+      margin-top: 0.5rem;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+    }
+
+    button {
+      margin-top: 1rem;
+      padding: 0.5rem 1rem;
+      background-color: #800000;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background-color: #a00000;
+    }
+
+    .result {
+      margin-top: 1.5rem;
+      padding: 1rem;
+      background-color: #f0f0f0;
+      border-left: 5px solid #800000;
+    }
+
+    .footer {
+      background-color: #800000;
+      color: white;
+      text-align: center;
+      padding: 1rem;
+      margin-top: 2rem;
+    }
+
+    .radio-group {
+      display: flex;
+      gap: 2rem;
+      margin-bottom: 1rem;
+    }
+
+    .radio-group label {
+      font-weight: normal;
+      display: flex;
+      align-items: center;
+    }
+
+    .radio-group input {
+      margin-right: 0.5rem;
+    }
+
+    #ip-esf-checkbox {
+      display: none; /* по умолчанию скрыт */
+    }
+    form {
+  max-width: 600px;
+  margin: 0 auto;
+  background-color: #fdfdfd;
+  padding: 20px;
+  border-radius: 10px;
+}
+
+form label {
+  font-weight: bold;
+  margin-top: 1rem;
+  display: block;
+}
+
+form input[type="text"],
+form input[type="date"],
+form select,
+form textarea {
+  width: 100%;
+  max-width: 100%;
+  padding: 8px;
+  margin: 5px 0 15px 0;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+  font-family: inherit;
+  font-size: 1rem;
+  box-sizing: border-box;
+}
+
+form textarea {
+  resize: vertical;
+}
+
+.radio-row {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin: 0.5rem 0 1rem;
+}
+
+.radio-row input[type="radio"] {
+  margin-right: 0.3rem;
+}
+
+form button[type="submit"] {
+  background-color: #800000;
+  color: white;
+  border: none;
+  padding: 12px 20px;
+  border-radius: 5px;
+  font-size: 1rem;
+  cursor: pointer;
+}
+
+form button[type="submit"]:hover {
+  background-color: #a00000;
+}
+  </style>
+</head>
+<body>
+  <header>
+    <div class="topbar">
+      <h1>ЮрАссист</h1>
+      <div class="language-switcher">
+        <button onclick="setLanguage('kz')">ҚАЗ</button>
+        <button onclick="setLanguage('ru')">РУС</button>
+        <button onclick="setLanguage('en')">ENG</button>
+      </div>
+    </div>
+    <nav>
+      <ul>
+        <li><a href="index.html">Главная</a></li>
+        <li><a href="ai.html">ИИ-консультант</a></li>
+        <li><a href="calculator.html">Калькулятор</a></li>
+        <li><a href="articles.html">Статьи</a></li>
+        <li><a href="about.html">О проекте</a></li>
+      </ul>
+    </nav>
+  </header>
+  <main>
+    <section class="consultation">
+        <h2>Консультация для малого бизнеса</h2>
+        <div class="consultation-options">
+            <button class="consultation-button" data-section="registration">📄 Регистрация ИП / ТОО</button>
+            <button class="consultation-button" data-section="fines">💸 Штрафы и проверки</button>
+            <button class="consultation-button" data-section="legislation">📍 Местное законодательство</button>
+            <button class="consultation-button" data-section="rent">🏢 Аренда и недвижимость</button>
+            <button class="consultation-button" data-section="protection">🛡 Защита прав предпринимателя</button>
+            <button class="consultation-button" data-section="custom-query">📝 Свой запрос</button>
+        </div>
+        
+        <div class="form-container" id="formContainer"></div>
+        <div id="chat-box" class="chat-container">
+          <!-- Ответы от бота будут добавляться сюда -->
+        </div>
+        
+    </section>
+</main>
+
+<footer>
+    <p>© 2025 ЮрАссист. Все права защищены.</p>
+</footer>
+
+<script src="script.js"></script>
+
+<script>
+    function askAI() {
+      const userMessage = document.getElementById("userInput").value;
+      
+      console.log("Отправка сообщения:", userMessage); // <--- Добавлено для отладки
+
+      fetch("http://localhost:5000/ask", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify({ message: userMessage })
+      })
+        .then(response => response.json())
+        .then(data => {
+          console.log("Ответ от сервера:", data); // <--- тоже лог
+          document.getElementById("response").innerText = data.reply || data.error;
+        })
+        .catch(error => {
+          console.error("Ошибка запроса:", error); // <--- лог ошибки
+          document.getElementById("response").innerText = "Ошибка: " + error.message;
+        });
+    }
+
+  </script>
+
+</body>
+</html>

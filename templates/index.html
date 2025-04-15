@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>ЮрАссист – Главная</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <header>
+    <div class="topbar">
+      <h1>ЮрАссист</h1>
+      <div class="language-switcher">
+        <button onclick="setLanguage('kz')">ҚАЗ</button>
+        <button onclick="setLanguage('ru')">РУС</button>
+        <button onclick="setLanguage('en')">ENG</button>
+      </div>
+    </div>
+    <nav>
+      <ul>
+        <li><a href="index.html">Главная</a></li>
+        <li><a href="ai.html">ИИ-консультант</a></li>
+        <li><a href="calculator.html">Калькулятор</a></li>
+        <li><a href="articles.html">Статьи</a></li>
+        <li><a href="about.html">О проекте</a></li>
+      </ul>
+    </nav>
+  </header>  
+
+  <main>
+
+    <!-- Hero-секция -->
+    <section class="hero-section">
+      <div class="hero-text">
+          <h1>Нужна помощь юриста?</h1>
+          <p>Быстрое решение ваших юридических вопросов для малого бизнеса.</p>
+      </div>
+    </section>  
+    
+  
+    <!-- Дополнительный информационный блок -->
+    <section class="features" id="services">
+      <h2>Наши услуги:</h2>
+      <div class="feature">
+          <img src="assets/ai.png" alt="AI Assistant" class="feature-icon">
+          <h3>ИИ-Консультант</h3>
+          <p>Получайте юридические консультации в реальном времени на понятном языке. Доступно 24/7.</p>
+      </div>
+      <div class="feature">
+          <img src="assets/tax.png" alt="Tax Calculator" class="feature-icon">
+          <h3>Налоговый калькулятор</h3>
+          <p>Быстрый расчёт налогов и обязательных платежей для малого бизнеса, ИП и ТОО.</p>
+      </div>
+      <div class="feature">
+          <img src="assets/document.png" alt="Document Builder" class="feature-icon">
+          <h3>В будущем...</h3>
+          <p>Проект планирует дополнять свои сервисы в будущем</p>
+      </div>
+  </section>
+
+  <!-- Секция "Последние новости" -->
+<section class="news">
+  <h2>Последние новости</h2>
+  <ul>
+    <li><a href="https://kapital.kz/economic/133913/rost-nds-i-izmeneniya-nalogovoy-sistemy-kosnut-sya-malogo-biznesa-analitiki.html" class="news-link" id="news1">Рост НДС и изменения налоговой системы коснутся малого бизнеса - аналитики</a></li>
+    <li><a href="https://finratings.kz/news/2103-uproshchenku-dlia-malogo-biznesa-ostavliaiut-v-kazakhstane/" class="news-link" id="news2">Упрощенку для малого бизнеса оставляют в Казахстане</a></li>
+    <li><a href="https://www.zakon.kz/mir/6472463-novye-pravila-dlya-onlayntorgovli-zapustili-v-turtsii.html" class="news-link" id="news3">Новые правила для онлайн-торговли запустили в Турции</a></li>
+    <li><a href="https://uchet.kz/news/novyy-nalogovyy-kodeks-v-kazakhstane-syurprizy-i-vyzovy/" class="news-link" id="news4">Новый налоговый кодекс Казахстана 2025</a></li>
+  </ul>
+</section>
+
+  <!-- Секция "Отзывы" -->
+<section class="reviews">
+  <h2>Отзывы пользователей</h2>
+  <div class="review">
+      <p>"Отличный сервис! Быстро помогли с юридическими документами и налоговыми расчетами. Очень рекомендую!"</p>
+      <p><strong>Иван К.</strong> - 01-05-2025</p>
+  </div>
+  <div class="review">
+      <p>"Очень удобный калькулятор для малого бизнеса. Помог избежать лишних налоговых штрафов!"</p>
+      <p><strong>Гульнар Ш.</strong> - 20-04-2025</p>
+  </div>
+  <div class="review">
+      <p>"Спасибо за быструю юридическую консультацию! Все доступно и понятно, без лишней юридической терминологии."</p>
+      <p><strong>Арман Д.</strong> - 15-04-2025</p>
+  </div>
+</section>
+
+
+<!-- Секция "FAQ" -->
+<section class="faq">
+  <h2>Часто задаваемые вопросы</h2>
+  <div class="faq-item">
+      <button class="faq-question" onclick="toggleAnswer('answer1')">Что такое ИИ-консультант?</button>
+      <div class="faq-answer" id="answer1">
+          <p>ИИ-консультант — это система, которая предоставляет юридические консультации на базе искусственного интеллекта. Он может отвечать на вопросы, связанные с бизнес-правом, налогообложением и другими юридическими темами.</p>
+      </div>
+  </div>
+  <div class="faq-item">
+      <button class="faq-question" onclick="toggleAnswer('answer2')">Как пользоваться налоговым калькулятором?</button>
+      <div class="faq-answer" id="answer2">
+          <p>Просто введите необходимые данные (например, доходы и расходы вашего бизнеса), и калькулятор автоматически рассчитает налоговые обязательства и платежи.</p>
+      </div>
+  </div>
+</section>
+  
+<!-- Footer -->
+<footer>
+  <p>© 2025 ПравоБизнес | Все права защищены</p>
+  <p>Проект создан в рамках цифровизации правовых институтов</p>
+  <p>Связь: pravobiz@edu.kz</p>
+</footer>
+
+<script>
+  // Функция для переключения ответов в FAQ
+  function toggleAnswer(answerId) {
+      var answer = document.getElementById(answerId);
+      answer.style.display = answer.style.display === 'block' ? 'none' : 'block';
+  }
+</script>
+
+</body>
+</html>

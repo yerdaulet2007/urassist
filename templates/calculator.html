@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Калькулятор налогов | ЮрАссист</title>
+  <link rel="stylesheet" href="style.css" />
+  <style>
+    html, body {
+      height: 100%;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .topbar {
+      background-color: #800000;
+      color: white;
+      padding: 1rem;
+    }
+
+    main {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .calculator-container {
+      max-width: 600px;
+      background: white;
+      margin: 2rem auto;
+      padding: 2rem;
+      border-radius: 10px;
+      box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+    }
+
+    .footer {
+      background-color: #2e2e2e;
+      color: white;
+      text-align: center;
+      padding: 1rem;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="topbar">
+      <h1>ЮрАссист</h1>
+      <div class="language-switcher">
+        <button onclick="setLanguage('kz')">ҚАЗ</button>
+        <button onclick="setLanguage('ru')">РУС</button>
+        <button onclick="setLanguage('en')">ENG</button>
+      </div>
+    </div>
+    <nav>
+      <ul>
+        <li><a href="index.html">Главная</a></li>
+        <li><a href="ai.html">ИИ-консультант</a></li>
+        <li><a href="calculator.html">Калькулятор</a></li>
+        <li><a href="articles.html">Статьи</a></li>
+        <li><a href="about.html">О проекте</a></li>
+      </ul>
+    </nav>
+  </header>
+  <main>
+    <div class="calculator-container">
+      <h2>Налоговый калькулятор</h2>
+      <div class="radio-group">
+        <label><input type="radio" name="type" value="ip" checked onchange="toggleForm()"> ИП (Индивидуальный предприниматель)</label>
+        <label><input type="radio" name="type" value="too" onchange="toggleForm()"> ТОО (Товарищество с ограниченной ответственностью)</label>
+      </div>
+  
+      <!-- Обновленная форма для ИП -->
+      <form id="form-ip">
+        <label>Доход (тенге):</label>
+        <input type="number" id="ip-income" required>
+  
+        <div class="radio-group">
+          <label><input type="radio" name="ip-tax" value="usn3" checked> УСН 3%</label>
+          <label><input type="radio" name="ip-tax" value="usn8"> УСН 8%</label>
+          <label><input type="radio" name="ip-tax" value="osn"> ОСН</label>
+        </div>
+  
+        <div class="expense-section" id="ip-expenses">
+          <label>Расходы (тенге):</label>
+          <input type="number" id="ip-expense">
+        </div>
+  
+        <div class="new-section" style="margin-top:1rem;">
+          <label><input type="checkbox" id="ip-vat"> Зарегистрирован как плательщик НДС</label>
+        </div>
+  
+        <button type="button" onclick="calculateIP()">Рассчитать</button>
+        <div class="result" id="ip-result"></div>
+      </form>
+  
+      <!-- Форма для ТОО -->
+      <form id="form-too" style="display: none;">
+        <label>Доход (тенге):</label>
+        <input type="number" id="too-income" required>
+  
+        <div class="radio-group">
+          <label><input type="radio" name="too-tax" value="usn3" checked> УСН 3%</label>
+          <label><input type="radio" name="too-tax" value="usn8"> УСН 8%</label>
+          <label><input type="radio" name="too-tax" value="osn"> ОСН</label>
+        </div>
+  
+        <div class="expense-section" id="too-expenses">
+          <label>Расходы (тенге):</label>
+          <input type="number" id="too-expense">
+        </div>
+  
+        <div class="new-section" style="margin-top:1rem;">
+          <label><input type="checkbox" id="too-vat"> Зарегистрирован как плательщик НДС</label>
+        </div>
+  
+        <button type="button" onclick="calculateTOO()">Рассчитать</button>
+        <div class="result" id="too-result"></div>
+      </form>
+    </div>
+  </main>
+    <!-- Футер без изменений -->
+    <div class="footer">
+        <p>© 2025 ПравоБизнес | Все права защищены</p>
+        <p>Связь: pravobiz@edu.kz</p>
+      </div>
+      <script>
+        const МЗП = 85000;
+        const maxOPV = 50 * МЗП;
+        const maxSOC = 10 * МЗП;
+      
+        function calculateIP() {
+          const income = +document.getElementById('ip-income').value;
+          const taxType = document.querySelector('input[name="ip-tax"]:checked').value;
+          const expenses = +document.getElementById('ip-expense').value || 0;
+          const hasVAT = document.getElementById('ip-vat').checked;
+      
+          let mainTax = 0, taxName = '';
+          switch(taxType) {
+            case 'usn3':
+              mainTax = income * 0.03;
+              taxName = 'УСН 3% (от дохода)';
+              break;
+            case 'usn8':
+              mainTax = Math.max(income - expenses, 0) * 0.08;
+              taxName = 'УСН 8% (от прибыли)';
+              break;
+            case 'osn':
+              mainTax = income * 0.10;
+              taxName = 'ОСН (ИПН 10%) от дохода';
+              break;
+          }
+      
+          const opv = Math.min(income, maxOPV) * 0.10;
+          const so = Math.min(income, maxSOC) * 0.035;
+          const osms = Math.min(income, maxSOC) * 0.02;
+          const vat = hasVAT ? income * 0.12 : 0;
+      
+          const totalTax = mainTax + opv + so + osms + vat;
+          const netIncome = income - totalTax - (taxType === 'usn8' ? expenses : 0);
+      
+          let result = `
+            <strong>Основной налог (${taxName}):</strong> ${mainTax.toFixed(2)} тг<br>
+            <strong>ОПВ(Обязательные пенсионные взносы) (10%):</strong> ${opv.toFixed(2)} тг<br>
+            <strong>СО(Социальные отчисления) (3.5%):</strong> ${so.toFixed(2)} тг<br>
+            <strong>ОСМС(Обязательное социальное медицинское страхование) (2%):</strong> ${osms.toFixed(2)} тг<br>
+          `;
+          if (hasVAT) result += `<strong>НДС (12%):</strong> ${vat.toFixed(2)} тг<br>`;
+      
+          result += `
+            <hr>
+            <strong>Итого налогов и взносов: ${totalTax.toFixed(2)} тг</strong><br>
+            <strong>Чистый доход: ${netIncome.toFixed(2)} тг</strong>
+          `;
+          document.getElementById('ip-result').innerHTML = result;
+        }
+      
+        function calculateTOO() {
+          const income = +document.getElementById('too-income').value;
+          const taxType = document.querySelector('input[name="too-tax"]:checked').value;
+          const expenses = +document.getElementById('too-expense').value || 0;
+          const hasVAT = document.getElementById('too-vat').checked;
+      
+          let mainTax = 0, taxName = '';
+          switch(taxType) {
+            case 'usn3':
+              mainTax = income * 0.03;
+              taxName = 'УСН 3% (от дохода)';
+              break;
+            case 'usn8':
+              mainTax = Math.max(income - expenses, 0) * 0.08;
+              taxName = 'УСН 8% (от прибыли)';
+              break;
+            case 'osn':
+              mainTax = Math.max(income - expenses, 0) * 0.20;
+              taxName = 'ОСН (КПН 20%) от прибыли';
+              break;
+          }
+      
+          const vat = hasVAT ? income * 0.12 : 0;
+          const socialTax = income * 0.095; // предполагаем, что есть сотрудники
+      
+          const totalTax = mainTax + vat + socialTax;
+          const netProfit = income - totalTax - expenses;
+      
+          let result = `
+            <strong>Основной налог (${taxName}):</strong> ${mainTax.toFixed(2)} тг<br>
+            <strong>Соцналог (9.5%):</strong> ${socialTax.toFixed(2)} тг<br>
+          `;
+          if (hasVAT) result += `<strong>НДС (12%):</strong> ${vat.toFixed(2)} тг<br>`;
+      
+          result += `
+            <hr>
+            <strong>Итого налогов и взносов: ${totalTax.toFixed(2)} тг</strong><br>
+            <strong>Чистая прибыль: ${netProfit.toFixed(2)} тг</strong>
+          `;
+          document.getElementById('too-result').innerHTML = result;
+        }
+      
+        function toggleForm() {
+          const selectedType = document.querySelector('input[name="type"]:checked').value;
+          document.getElementById('form-ip').style.display = selectedType === 'ip' ? 'block' : 'none';
+          document.getElementById('form-too').style.display = selectedType === 'too' ? 'block' : 'none';
+        }
+      </script>      
+  </body>
+  </html>

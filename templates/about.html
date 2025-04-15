@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>О проекте – ЮрАссист</title>
+  <link rel="stylesheet" href="style.css" />
+  <style>
+    .about-hero {
+      position: relative;
+      height: 100vh;
+      overflow: hidden;
+    }
+
+    .about-hero img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      filter: brightness(40%);
+    }
+
+    .about-text {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      color: white;
+      text-align: center;
+      padding: 0 20px;
+    }
+
+    .about-text h1 {
+      font-size: 3rem;
+      margin-bottom: 1rem;
+    }
+
+    .about-text p {
+      font-size: 1.3rem;
+      line-height: 1.6;
+      max-width: 1000px;
+      margin: 0 auto;
+    }
+
+    .about-section {
+      padding: 4rem 2rem;
+      background-color: #fff;
+      color: #333;
+      max-width: 1000px;
+      margin: auto;
+    }
+
+    footer {
+      background-color: #222;
+      color: #fff;
+      text-align: center;
+      padding: 1.5rem;
+    }
+
+    .topbar {
+      background-color: #800000;
+      color: white;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 10px 20px;
+    }
+
+    nav ul {
+      display: flex;
+      list-style: none;
+      justify-content: center;
+      background-color: #eee;
+      padding: 10px 0;
+      margin: 0;
+    }
+
+    nav ul li {
+      margin: 0 15px;
+    }
+
+    nav ul li a {
+      text-decoration: none;
+      color: #333;
+      font-weight: bold;
+    }
+
+    nav ul li a:hover {
+      color: #800000;
+    }
+
+    .language-switcher button {
+      margin-left: 10px;
+      background-color: white;
+      border: none;
+      color: #800000;
+      font-weight: bold;
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Красный верх -->
+  <header>
+    <div class="topbar">
+      <h1>ЮрАссист</h1>
+      <div class="language-switcher">
+        <button onclick="setLanguage('kz')">ҚАЗ</button>
+        <button onclick="setLanguage('ru')">РУС</button>
+        <button onclick="setLanguage('en')">ENG</button>
+      </div>
+    </div>
+    <nav>
+      <ul>
+        <li><a href="index.html">Главная</a></li>
+        <li><a href="ai.html">ИИ-консультант</a></li>
+        <li><a href="calculator.html">Калькулятор</a></li>
+        <li><a href="articles.html">Статьи</a></li>
+        <li><a href="about.html">О проекте</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <!-- Картинка с затемнением и текст -->
+  <section class="about-hero">
+    <img src="assets/law.jpg" alt="О проекте">
+    <div class="about-text">
+      <h1>О проекте ЮрАссист</h1>
+      <p>Инновационная платформа юридической помощи для малого бизнеса в Казахстане</p>
+    </div>
+  </section>
+
+  <!-- Контент проекта -->
+  <section class="about-section">
+    <h2>Почему мы создали ЮрАссист?</h2>
+    <p>
+      В условиях быстро меняющегося законодательства, предпринимателям особенно сложно ориентироваться в юридических вопросах.
+      ЮрАссист был создан как цифровое решение для облегчения ведения бизнеса, снижая юридические риски и сокращая время на рутину.
+      Мы стремимся сделать право доступным каждому – вне зависимости от его юридического опыта или бюджета.
+    </p>
+
+    <h2>Функции платформы</h2>
+    <p>
+      ЮрАссист предлагает несколько ключевых функций: искусственный интеллект-консультант, который мгновенно отвечает на ваши вопросы;
+      налоговый калькулятор, адаптированный под реальности Казахстана;
+      Все инструменты разработаны с учётом потребностей предпринимателей и соответствуют актуальному законодательству.
+    </p>
+
+    <h2>Наша команда</h2>
+    <p>
+      Проект разработан студентами и специалистами в области права, информационных технологий и бизнеса. Мы объединились,
+      чтобы создать инструмент, который по-настоящему помогает, а не усложняет. Каждый участник команды вложил знания, опыт и вдохновение,
+      чтобы сделать ЮрАссист максимально полезным и простым.
+    </p>
+
+    <h2>Будущее ЮрАссист</h2>
+    <p>
+      Мы продолжаем развивать функциональность платформы, включая интеграции с государственными системами,
+      расширение базы знаний и поддержку новых форм бизнеса. В планах также запуск мобильного приложения и внедрение голосового ИИ-консультанта.
+      ЮрАссист — это не просто сервис, а движущая сила цифровизации правовой поддержки в стране.
+    </p>
+  </section>
+
+  <!-- Футер -->
+  <footer>
+    <p>© 2025 ПравоБизнес | Все права защищены</p>
+    <p>Проект создан в рамках цифровизации правовых институтов</p>
+    <p>Связь: pravobiz@edu.kz</p>
+  </footer>
+
+  <script>
+    function setLanguage(lang) {
+      alert("Языковая смена в разработке: " + lang);
+    }
+  </script>
+
+</body>
+</html>

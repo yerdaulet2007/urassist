@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Полезные статьи для предпринимателей</title>
+  <link rel="stylesheet" href="style.css" />
+  <style>
+    html, body {
+      height: 100%;
+      margin: 0;
+      padding: 0;
+      font-family: Arial, sans-serif;
+      background-color: #f4f4f4;
+    }
+
+    body {
+      display: flex;
+      flex-direction: column;
+    }
+
+    main {
+      flex: 1;
+    }
+
+    header {
+      background-color: #800000;
+      color: white;
+      text-align: center;
+    }
+
+    .topbar h1 {
+      margin: 0;
+      font-size: 1.5rem;
+    }
+
+    nav {
+      background-color: #800000;
+    }
+
+    nav ul {
+      list-style: none;
+      display: flex;
+      justify-content: center;
+      gap: 1rem;
+      margin: 0;
+      padding: 0.5rem;
+    }
+
+    nav ul li {
+      border-bottom: 2px solid transparent;
+    }
+
+    nav ul li a {
+      color: white;
+      text-decoration: none;
+      font-weight: bold;
+      padding: 5px 0;
+    }
+
+    nav ul li a:hover {
+      border-bottom: 2px solid white;
+    }
+
+    header h1 {
+      margin: 1rem 0;
+    }
+
+    .articles-container {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      margin: 20px;
+    }
+
+    .article-card {
+      background-color: white;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      margin: 10px;
+      padding: 20px;
+      width: 300px;
+      border-radius: 8px;
+    }
+
+    .article-card h3 {
+      color: #800000;
+    }
+
+    .article-card p {
+      font-size: 14px;
+      color: #555;
+    }
+
+    .article-card a {
+      text-decoration: none;
+      color: #800000;
+      font-weight: bold;
+      margin-top: 10px;
+      display: inline-block;
+    }
+
+    footer {
+      background-color: #222;
+      color: #fff;
+      text-align: center;
+      padding: 1.5rem;
+    }
+
+    .language-switcher button {
+      margin-left: 0.5rem;
+      background: none;
+      border: 1px solid white;
+      color: white;
+      padding: 0.3rem 0.6rem;
+      border-radius: 4px;
+      cursor: pointer;
+    }
+
+    .language-switcher button:hover {
+      background-color: white;
+      color: #444;
+    }
+  </style>
+</head>
+<body>
+    <header>
+      <div class="topbar">
+        <h1>ЮрАссист</h1>
+        <div class="language-switcher">
+          <button onclick="setLanguage('kz')">ҚАЗ</button>
+          <button onclick="setLanguage('ru')">РУС</button>
+          <button onclick="setLanguage('en')">ENG</button>
+        </div>
+      </div>
+      <nav>
+        <ul>
+          <li><a href="index.html">Главная</a></li>
+          <li><a href="ai.html">ИИ-консультант</a></li>
+          <li><a href="calculator.html">Калькулятор</a></li>
+          <li><a href="articles.html">Статьи</a></li>
+          <li><a href="about.html">О проекте</a></li>
+        </ul>
+      </nav>
+    </header>
+
+  <main>
+    <div class="articles-container">
+      <div class="article-card">
+        <h3>Как зарегистрировать ИП в Казахстане?</h3>
+        <p>Пошаговое руководство по регистрации индивидуального предпринимателя в Казахстане. Узнайте, какие документы необходимы и как пройти все этапы.</p>
+        <a href="https://egov.kz/cms/ru/articles/taxation/Kak-otkryt-IP" target="_blank">Читать статью</a>
+      </div>
+
+      <div class="article-card">
+        <h3>Важные аспекты налогообложения для ИП</h3>
+        <p>Обзор различных налоговых режимов для индивидуальных предпринимателей. Как выбрать подходящий режим и что важно учесть при подаче деклараций.</p>
+        <a href="https://example.com/article2" target="_blank">Читать статью</a>
+      </div>
+
+      <div class="article-card">
+        <h3>Трудовые отношения: что нужно знать работодателю</h3>
+        <p>Как правильно оформить трудовые отношения с сотрудниками, заключить трудовой договор и избежать нарушений законодательства.</p>
+        <a href="https://uchet.kz/tags/t/trudovye-otnosheniya.html" target="_blank">Читать статью</a>
+      </div>
+
+      <div class="article-card">
+        <h3>Как избежать юридических рисков в бизнесе</h3>
+        <p>Обзор основных юридических рисков, с которыми сталкиваются предприниматели, и советы по их минимизации.</p>
+        <a href="https://www.ipmconsult.by/news/upravlenie-yuridicheskimi-riskami-kak-predotvratit-yuridicheskie-problemy-v-biznese/" target="_blank">Читать статью</a>
+      </div>
+
+      <div class="article-card">
+        <h3>Как вести бухгалтерию для ИП</h3>
+        <p>Руководство по ведению бухгалтерского учета для индивидуальных предпринимателей. Какие книги и документы должны быть у вас на руках.</p>
+        <a href="https://mybuh.kz/useful/uproshchyennaya-deklaratsiya-v-kazakhstane-usloviya-i-osobennosti-vedeniya.html?sphrase_id=36748" target="_blank">Читать статью</a>
+      </div>
+
+      <div class="article-card">
+        <h3>Составление контрактов для малого бизнеса</h3>
+        <p>Как грамотно составить договор с партнерами, клиентами и подрядчиками. Важные моменты, которые необходимо учесть.</p>
+        <a href="https://school.bigbird.ru/courses/3-2-1-start/dogovornye-otnosheniya/" target="_blank">Читать статью</a>
+      </div>
+    </div>
+  </main>
+
+  <footer>
+    <p>© 2025 ЮрАссист. Все права защищены.</p>
+  </footer>
+</body>
+</html>

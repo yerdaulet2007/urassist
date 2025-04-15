@@ -1,0 +1,718 @@
+/* Общий стиль */
+body {
+  font-family: 'Georgia', serif;
+  margin: 0;
+  padding: 0;
+  background-color: #f4f4f4;
+  color: #000000;
+}
+
+/* Шапка */
+header {
+  background-color: #800000;
+  color: white;
+  padding-bottom: 0.5em;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+}
+
+.topbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1em;
+}
+
+.language-switcher button {
+  background-color: white;
+  color: #800000;
+  border: 2px solid #800000;
+  border-radius: 4px;
+  padding: 0.4em 1em;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.language-switcher button:hover {
+  background-color: #b22222;
+  color: white;
+}
+
+nav ul {
+  list-style: none;
+  display: flex;
+  justify-content: center;
+  gap: 2em;
+  padding: 0.5em 0;
+  margin: 0;
+  background-color: #4b0000;
+}
+
+nav a {
+  color: white;
+  text-decoration: none;
+  font-weight: bold;
+  font-size: 1.1em;
+}
+
+nav a:hover {
+  text-decoration: underline;
+}
+
+/* Hero-секция */
+.hero-section {
+  position: relative;
+  height: 100vh; /* Занимает весь экран по высоте */
+  background: url('assets/lady.jpg') no-repeat center center/cover; /* Ваша картинка на весь экран */
+  color: white; /* Цвет текста */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
+
+.hero-text {
+  z-index: 10; /* Убедитесь, что текст сверху */
+  position: relative;
+}
+
+.hero-text h1 {
+  font-size: 4rem; /* Очень большой размер шрифта для заголовка */
+  margin-bottom: 1rem;
+}
+
+.hero-text p {
+  font-size: 2rem; /* Большой шрифт для текста */
+}
+
+
+.cta-button {
+  display: inline-block;
+  padding: 0.8em 2em;
+  margin-top: 1em;
+  background-color: #800000;
+  color: white;
+  text-decoration: none;
+  border-radius: 8px;
+  font-weight: bold;
+  transition: background-color 0.3s ease;
+}
+
+.cta-button:hover {
+  background-color: #b22222;
+}
+
+/* Функции */
+.features {
+  display: flex;
+  justify-content: space-around;
+  flex-wrap: wrap;
+  padding: 2em 1em;
+  background: #f9f9f9;
+  gap: 1.5em;
+}
+
+.feature {
+  width: 300px;
+  background: white;
+  padding: 1.5em;
+  border-radius: 10px;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.feature-icon {
+  width: 80px;
+  height: 80px;
+  margin-bottom: 1em;
+  object-fit: contain;
+}
+
+
+.feature h3 {
+  color: #800000;
+}
+
+.cta-info {
+  text-align: center;
+  margin: 40px 0;
+}
+
+.cta-info p {
+  font-size: 18px;
+  line-height: 1.6;
+  color: #333;
+}
+/* Стили для геро-секции */
+.hero-section {
+  position: relative;
+  height: 100vh;
+  background: url('assets/lady.jpg') no-repeat center center;
+  background-size: cover;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: white;
+  text-align: center;
+}
+
+.hero-text h1 {
+  font-size: 60px;
+  margin-bottom: 20px;
+}
+
+.hero-text p {
+  font-size: 24px;
+  margin-bottom: 40px;
+}
+
+.cta-button {
+  background-color: #800000;
+  color: white;
+  padding: 15px 25px;
+  font-size: 18px;
+  text-decoration: none;
+  border-radius: 5px;
+}
+
+/* Стили для секции новостей */
+.news {
+  padding: 40px 20px;
+  background-color: #800008;
+  text-align: center;
+}
+
+.news-link {
+  font-size: 20px;
+  color: white;
+  text-decoration: none;
+  display: block;
+  margin-bottom: 10px;
+}
+
+/* Стили для секции отзывов */
+.reviews {
+  padding: 40px 20px;
+  background-color: #fff;
+  text-align: center;
+}
+
+.review {
+  margin-bottom: 30px;
+}
+
+.review p {
+  font-size: 18px;
+}
+
+/* Стили для секции FAQ */
+.faq-item {
+  margin-bottom: 20px;
+}
+
+.faq-question {
+  background-color: #800000;
+  color: white;
+  padding: 15px;
+  font-size: 18px;
+  width: 100%;
+  text-align: left;
+  border: none;
+  cursor: pointer;
+}
+
+.faq-answer {
+  display: none;
+  background-color: #f4f4f4;
+  padding: 15px;
+  font-size: 16px;
+  text-align: left;
+}
+
+
+footer {
+  background-color: #2e2e2e;
+  color: white;
+  text-align: center;
+  padding: 20px;
+  margin-top: 40px;
+}
+  
+  .language-switcher button {
+    background: white;
+    color: #0d47a1;
+    border: none;
+    margin-left: 0.5em;
+    padding: 0.5em 1em;
+    font-weight: bold;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  
+  .language-switcher button:hover {
+    background-color: #bbdefb;
+  }
+  
+  /* Общие стили */
+body {
+  font-family: Arial, sans-serif;
+  background-color: #f9f9f9;
+  color: #333;
+  margin: 0;
+  padding: 0;
+}
+
+header {
+  background-color: #800000;
+  padding: 10px;
+}
+
+nav ul {
+  list-style: none;
+  display: flex;
+  justify-content: space-around;
+}
+
+nav a {
+  color: white;
+  text-decoration: none;
+  font-size: 16px;
+}
+
+.consultation {
+  text-align: center;
+  padding: 50px 10px;
+}
+
+.consultation h2 {
+  font-size: 24px;
+  margin-bottom: 30px;
+}
+
+.consultation-button {
+  background-color: #800000;
+  color: white;
+  padding: 15px 30px;
+  border: none;
+  border-radius: 5px;
+  margin: 10px;
+  cursor: pointer;
+  font-size: 18px;
+  transition: background-color 0.3s ease;
+}
+
+.consultation-button:hover {
+  background-color: #600000;
+}
+
+.form-container {
+  margin-top: 30px;
+  display: none; /* Скрыто до появления нужной формы */
+  animation: fadeIn 1s ease-in;
+}
+
+/* Анимация появления */
+@keyframes fadeIn {
+  from {
+      opacity: 0;
+  }
+  to {
+      opacity: 1;
+  }
+}
+
+/* Стиль кнопок в форме */
+button[type="submit"] {
+  background-color: #4CAF50;
+  color: white;
+  padding: 15px 30px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+button[type="submit"]:hover {
+  background-color: #45a049;
+}
+button[type="submit"] {
+  background-color: #800000;
+  color: white;
+  padding: 12px 20px;
+  border: none;
+  border-radius: 5px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+button[type="submit"]:hover {
+  background-color: #a30000;
+}
+/* 1. Растягиваем body на весь экран и делаем его флекс-контейнером */
+html, body {
+  height: 100%;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+}
+
+/* 2. Делаем main гибким, чтобы занимал всё оставшееся пространство */
+main {
+  flex: 1;
+  padding: 20px;
+}
+
+/* 3. Футер всегда внизу */
+footer {
+  background-color: #2e2e2e;
+  color: white;
+  text-align: center;
+  padding: 1rem;
+  font-size: 0.9rem;
+}
+
+.form-container h3 {
+  font-size: 24px; /* Заголовок */
+}
+
+.form-container label {
+  font-size: 18px; /* Подписи к полям */
+}
+
+.form-container textarea::placeholder {
+  font-size: 16px; /* Плейсхолдер в текстовом поле */
+}
+.form-container textarea {
+  width:50%;
+  height: 150px;
+  font-size: 16px;
+  padding: 10px;
+  box-sizing: border-box;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+  resize: vertical; /* чтобы можно было вручную растягивать */
+}
+
+.result {
+  margin-top: 20px;
+  padding: 15px;
+  background-color: #f9f9f9;
+  border-left: 4px solid #800000;
+  border-radius: 6px;
+  font-size: 16px;
+  line-height: 1.6;
+  white-space: normal;
+}
+.result p {
+  margin-bottom: 12px;
+}
+#chat-box {
+  width: 100%;
+  max-width: 600px;
+  margin: 0 auto;
+  padding: 10px;
+  background-color: #f4f4f4;
+  border-radius: 10px;
+  overflow-y: auto;
+  height: 400px;  /* Поставь нужный размер */
+}
+
+.chat-bubble {
+  padding: 10px;
+  margin: 10px 0;
+  border-radius: 20px;
+  max-width: 80%;
+  word-wrap: break-word;
+}
+
+.chat-bubble.user {
+  background-color: #e1ffe1;
+  align-self: flex-end; /* Выравниваем по правому краю */
+}
+
+.chat-bubble.bot {
+  background-color: #e0e0e0;
+  align-self: flex-start; /* Выравниваем по левому краю */
+}
+/* Контейнер переписки */
+.chat-container {
+  margin-top: 20px;
+  padding: 15px;
+  border-radius: 15px;
+  background-color: #fff7f7;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  max-height: 400px;
+  overflow-y: auto;
+  font-family: Arial, sans-serif;
+}
+
+/* Сообщения */
+.chat-bubble {
+  padding: 12px 16px;
+  margin: 10px 0;
+  border-radius: 18px;
+  max-width: 80%;
+  line-height: 1.5;
+  font-size: 15px;
+  word-wrap: break-word;
+}
+
+/* Сообщения пользователя */
+.chat-bubble.user {
+  background-color: #ffe3e3;
+  color: #600000;
+  align-self: flex-end;
+  margin-left: auto;
+  text-align: right;
+  border: 1px solid #ffaaaa;
+}
+
+/* Сообщения бота */
+.chat-bubble.bot {
+  background-color: #f0f0f0;
+  color: #333;
+  align-self: flex-start;
+  margin-right: auto;
+  text-align: left;
+  border: 1px solid #ccc;
+}
+#main-content {
+  flex: 1;
+}
+.topbar {
+  background-color: #800000;
+  color: white;
+  padding: 1rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.topbar h1 {
+  margin: 0;
+  font-size: 1.5rem;
+  color: white;
+}
+
+nav ul {
+  list-style: none;
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+  padding: 0.5rem;
+}
+
+nav ul li {
+  border-bottom: 2px solid transparent;
+}
+
+nav ul li a {
+  color: white;
+  text-decoration: none;
+  font-weight: bold;
+  padding: 5px 0;
+}
+
+nav ul li a:hover {
+  color: white;
+  border-bottom: 2px solid white;
+}
+
+.calculator-container {
+  max-width: 600px;
+  background: white;
+  margin: 2rem auto;
+  padding: 2rem;
+  border-radius: 10px;
+  box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+}
+
+.calculator-container h2 {
+  color: #800000;
+  margin-bottom: 1rem;
+}
+
+label {
+  display: block;
+  margin-top: 1rem;
+  font-weight: bold;
+}
+
+input[type="number"] {
+  width: 100%;
+  padding: 0.5rem;
+  margin-top: 0.5rem;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+button {
+  margin-top: 1rem;
+  padding: 0.5rem 1rem;
+  background-color: #800000;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+button:hover {
+  background-color: #a00000;
+}
+
+.result {
+  margin-top: 1.5rem;
+  padding: 1rem;
+  background-color: #f0f0f0;
+  border-left: 5px solid #800000;
+}
+html, body {
+  height: 100%;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+}
+
+main {
+  flex: 1;
+}
+
+.footer {
+  background-color: #2e2e2e;
+  color: white;
+  text-align: center;
+  padding: 1rem;
+  margin-top: 2rem;
+}
+
+.radio-group {
+  display: flex;
+  gap: 2rem;
+  margin-bottom: 1rem;
+}
+
+.radio-group label {
+  font-weight: normal;
+  display: flex;
+  align-items: center;
+}
+
+.radio-group input {
+  margin-right: 0.5rem;
+}
+
+#ip-esf-checkbox {
+  display: none;
+}
+
+/* Общие стили */
+body {
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+  background-color: #f4f4f4;
+}
+
+header {
+  background-color: #800000;
+  color: white;
+  padding: 20px;
+  text-align: center;
+}
+
+h1 {
+  margin: 0;
+  font-size: 24px;
+}
+
+/* Стили для кнопок */
+#serviceButtons {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  margin-top: 20px;
+}
+
+.service-button {
+  background-color: #800000;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  margin: 5px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.service-button:hover {
+  background-color: #5e0000;
+}
+
+/* Стили для контейнера формы */
+#formContainer {
+  margin-top: 30px;
+  padding: 20px;
+  background-color: white;
+  border-radius: 8px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+}
+
+label {
+  margin-bottom: 5px;
+  font-weight: bold;
+}
+
+input {
+  padding: 10px;
+  margin-bottom: 15px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 16px;
+}
+
+button {
+  padding: 10px;
+  background-color: #800000;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+button:hover {
+  background-color: #5e0000;
+}
+.radio-group {
+  display: flex;
+  justify-content: center; /* Центрирование по горизонтали */
+  gap: 20px;                /* Отступы между кнопками */
+  margin-bottom: 10px;
+}
+
+.radio-group label {
+  font-size: 16px;
+}
+
+/* Центрирование формы */
+form {
+  text-align: center;
+}
+
+/* Широкий текстбокс */
+textarea[name="custom-query"] {
+  width: 100%;
+  max-width: 600px;
+  resize: vertical;
+  padding: 10px;
+  font-size: 15px;
+}
+
