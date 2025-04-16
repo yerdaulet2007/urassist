@@ -1,5 +1,5 @@
 import os
-from flask import Flask, request, jsonify
+from flask import Flask, request, jsonify, render_template
 import openai  # Используйте openai, а не OpenAI
 from flask_cors import CORS
 from dotenv import load_dotenv
@@ -46,7 +46,7 @@ def ask():
 # Маршрут для домашней страницы
 @app.route("/", methods=["GET"])
 def home():
-    return "Hello, welcome to Urassist!"  # Или возвращайте HTML страницу, если необходимо
+    return render_template("index.html")  # Возвращаем HTML страницу из папки templates
 
 if __name__ == "__main__":
     # Получаем порт из переменной окружения (для Render) или используем 5000 по умолчанию
