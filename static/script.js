@@ -198,15 +198,20 @@ function setLanguage(lang) {
     
 
   
-  $(document).on('submit', 'form', function (e) {
-    e.preventDefault();
-  
-    const section = $(this).data('section'); // узнаём, какая форма
-    const formData = $(this).serializeArray();
-    const data = {};
-    formData.forEach(item => data[item.name] = item.value);
-  
-    let userMessage = "";
+    $(document).on('submit', 'form', function (e) {
+      e.preventDefault();
+    
+      const section = $(this).data('section');
+      const formData = $(this).serializeArray();
+      const data = {};
+      formData.forEach(item => data[item.name] = item.value);
+    
+      // Создаём сообщение из заполненной формы
+      let userMessage = `Раздел: ${section}\n`;
+      for (const [key, value] of Object.entries(data)) {
+        userMessage += `${key}: ${value}\n`;
+      }
+
   
     switch (section) {
       case 'registration':
@@ -289,34 +294,28 @@ function setLanguage(lang) {
 
         break;
     }
-  
-    $('#chat-box').append(`<div class="chat-bubble user">${userMessage}</div>`);
-  
-    $.ajax({
-      type: 'POST',
-      url: 'https://urassist.onrender.com/ask',
-      data: JSON.stringify({ message: userMessage }),
-      contentType: 'application/json',
-      success: function(response) {
-        console.log('Response from server:', response);  // Логируем весь ответ от сервера
-    
-        if (response && response.reply) {
-          // Добавляем ответ от бота в контейнер
-          $('#chat-box').append(`<div class="chat-bubble bot">${response.reply}</div>`);
-          // Прокручиваем контейнер вниз
-          $('#chat-box').scrollTop($('#chat-box')[0].scrollHeight);
-        } else {
-          $('#chat-box').append(`<div class="chat-bubble bot">Ответ не был получен.</div>`);
-        }
-      },
-      error: function(xhr, status, error) {
-        console.error('Error in request:', error);  // Логируем ошибку
-        $('#chat-box').append(`<div class="chat-bubble bot">Произошла ошибка. Попробуйте позже.</div>`);
+  // Добавляем сообщение пользователя в чат
+  $('#chat-box').append(`<div class="chat-bubble user">${userMessage}</div>`);
+
+  // Отправляем AJAX-запрос на сервер
+  $.ajax({
+    type: 'POST',
+    url: 'https://urassist.onrender.com/ask',
+    data: JSON.stringify({ message: userMessage }),
+    contentType: 'application/json',
+    success: function (response) {
+      console.log('Response from server:', response);
+      if (response && response.reply) {
+        $('#chat-box').append(`<div class="chat-bubble bot">${response.reply}</div>`);
+        $('#chat-box').scrollTop($('#chat-box')[0].scrollHeight);
+      } else {
+        $('#chat-box').append(`<div class="chat-bubble bot">Ответ не был получен.</div>`);
       }
-    });
-    
-    
-  
-    this.reset();
+    },
+    error: function (xhr, status, error) {
+      console.error('Error in request:', error);
+      $('#chat-box').append(`<div class="chat-bubble bot">Произошла ошибка. Попробуйте позже.</div>`);
+    }
   });
-  })
+});
+  });

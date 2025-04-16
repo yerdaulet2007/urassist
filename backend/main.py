@@ -3,6 +3,8 @@ from flask import Flask, request, jsonify, render_template
 import openai
 from flask_cors import CORS
 from dotenv import load_dotenv
+import traceback  # Импортируем для отладки
+
 # Загружаем переменные окружения из .env
 load_dotenv()
 
@@ -23,7 +25,6 @@ openai.api_key = os.getenv("OPENAI_API_KEY")
 def home():
     return render_template("index.html")
 
-# Роут для остальных страниц (если нужно)
 @app.route("/about")
 def about():
     return render_template("about.html")
@@ -43,37 +44,32 @@ def articles():
 # Роут для обработки POST-запроса от AI формы
 @app.route("/ask", methods=["POST"])
 def ask():
-    import traceback
     print("🛠 POST /ask был вызван")
-
-    data = request.json
-    print("Полученные данные:", data)
-
-    user_message = data.get("message", "")
-    print("📩 user_message:", user_message)
-
-    print("🔑 OpenAI API key начинается с:", openai.api_key[:5])
-
-    if not user_message:
-        return jsonify({"error": "Нет сообщения"}), 400
-
     try:
-        response = openai.ChatCompletion.create(
-            model="gpt-3.5-turbo",
-            messages=[
-                {"role": "system", "content": "Ты — юридический консультант по законодательству Казахстана. Отвечай ясно и по делу. Не давай советы, если не уверен."},
-                {"role": "user", "content": user_message}
-            ]
-        )
-        reply = response.choices[0].message["content"]
-        print(f"🤖 Ответ от OpenAI: {reply}")
-        return jsonify({"reply": reply})
-    except Exception as e:
-        traceback_str = traceback.format_exc()
-        print("❌ Произошла ошибка:")
-        print(traceback_str)
-        return jsonify({"error": str(e), "traceback": traceback_str}), 500
+        data = request.get_json()
+        print("📩 Получен JSON:", data)
 
+        user_message = data.get("message", "")
+        print("💬 Сообщение от пользователя:", user_message)
+
+        if not user_message:
+            return jsonify({"error": "Нет сообщения"}), 400
+
+        # Новый код с обновленным API
+        response = openai.completions.create(
+            model="gpt-3.5-turbo",  # В зависимости от версии используем подходящую модель
+            prompt=user_message,
+            max_tokens=100
+        )
+
+        reply = response['choices'][0]['text'].strip()  # Обрабатываем ответ
+        print("✅ Ответ от OpenAI:", reply)
+        return jsonify({"reply": reply})
+
+    except Exception as e:
+        print("❌ Ошибка:", str(e))
+        traceback.print_exc()
+        return jsonify({"error": str(e)}), 500
 
 
 # Запуск приложения
