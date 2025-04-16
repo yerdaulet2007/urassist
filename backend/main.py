@@ -3,7 +3,7 @@ from flask import Flask, request, jsonify, render_template
 import openai
 from flask_cors import CORS
 from dotenv import load_dotenv
-import traceback  # Импортируем для отладки
+import traceback
 
 # Загружаем переменные окружения из .env
 load_dotenv()
@@ -20,7 +20,7 @@ CORS(app)
 # Подключение OpenAI API
 openai.api_key = os.getenv("OPENAI_API_KEY")
 
-# Роут для главной страницы
+# Роуты для страниц
 @app.route("/", methods=["GET"])
 def home():
     return render_template("index.html")
@@ -49,22 +49,23 @@ def ask():
         data = request.get_json()
         print("📩 Получен JSON:", data)
 
-        user_message = data.get("message", "")
+        user_message = data.get("message", "").strip()
         print("💬 Сообщение от пользователя:", user_message)
 
         if not user_message:
             return jsonify({"error": "Нет сообщения"}), 400
 
-        # Новый код с правильным использованием v1/chat/completions
+        # Новый API OpenAI >= 1.0.0
         response = openai.chat.completions.create(
-            model="gpt-3.5-turbo",  # В зависимости от версии используем подходящую модель
+            model="gpt-3.5-turbo",
             messages=[
                 {"role": "system", "content": "Ты — юридический консультант по законодательству Казахстана. Отвечай ясно и по делу. Не давай советы, если не уверен."},
                 {"role": "user", "content": user_message}
             ]
         )
 
-        reply = response['choices'][0]['message']['content'].strip()  # Обрабатываем ответ
+        # Извлекаем ответ по новой структуре объекта
+        reply = response.choices[0].message.content.strip()
         print("✅ Ответ от OpenAI:", reply)
         return jsonify({"reply": reply})
 
@@ -72,7 +73,6 @@ def ask():
         print("❌ Ошибка:", str(e))
         traceback.print_exc()
         return jsonify({"error": str(e)}), 500
-
 
 # Запуск приложения
 if __name__ == "__main__":
