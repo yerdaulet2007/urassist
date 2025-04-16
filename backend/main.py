@@ -25,21 +25,9 @@ openai.api_key = os.getenv("OPENAI_API_KEY")
 def home():
     return render_template("index.html")
 
-@app.route("/about")
-def about():
-    return render_template("about.html")
-
-@app.route("/calculator")
-def calculator():
-    return render_template("calculator.html")
-
 @app.route("/ai")
 def ai():
     return render_template("ai.html")
-
-@app.route("/articles")
-def articles():
-    return render_template("articles.html")
 
 # Роут для обработки POST-запроса от AI формы
 @app.route("/ask", methods=["POST"])
@@ -55,14 +43,16 @@ def ask():
         if not user_message:
             return jsonify({"error": "Нет сообщения"}), 400
 
-        # Новый код с обновленным API
-        response = openai.completions.create(
+        # Новый код с правильным использованием v1/chat/completions
+        response = openai.chat_completions.create(
             model="gpt-3.5-turbo",  # В зависимости от версии используем подходящую модель
-            prompt=user_message,
-            max_tokens=100
+            messages=[
+                {"role": "system", "content": "Ты — юридический консультант по законодательству Казахстана. Отвечай ясно и по делу. Не давай советы, если не уверен."},
+                {"role": "user", "content": user_message}
+            ]
         )
 
-        reply = response['choices'][0]['text'].strip()  # Обрабатываем ответ
+        reply = response['choices'][0]['message']['content'].strip()  # Обрабатываем ответ
         print("✅ Ответ от OpenAI:", reply)
         return jsonify({"reply": reply})
 
