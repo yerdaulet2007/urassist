@@ -21,9 +21,6 @@ CORS(app)
 openai.api_key = os.getenv("OPENAI_API_KEY")
 
 # Роут для главной страницы
-@app.route('/calculator')
-def calculator():
-    return render_template('calculator.html')
 @app.route("/", methods=["GET"])
 def home():
     return render_template("index.html")
