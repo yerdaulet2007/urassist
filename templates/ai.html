@@ -6,7 +6,9 @@
   <title>ИИ помощник | ЮрАссист</title>
   
   <!-- Подключаем основной CSS -->
-  <link rel="stylesheet" href="style.css" />
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+  <script src="{{ url_for('static', filename='script.js') }}" defer></script>
+  
 
   <!-- Подключаем jQuery -->
   <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
@@ -229,8 +231,6 @@ form button[type="submit"]:hover {
 <footer>
     <p>© 2025 ЮрАссист. Все права защищены.</p>
 </footer>
-
-<script src="script.js"></script>
 
 <script>
     function askAI() {
