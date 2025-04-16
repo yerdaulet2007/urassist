@@ -3,7 +3,6 @@ from flask import Flask, request, jsonify, render_template
 import openai
 from flask_cors import CORS
 from dotenv import load_dotenv
-import traceback
 # Загружаем переменные окружения из .env
 load_dotenv()
 
@@ -44,8 +43,16 @@ def articles():
 # Роут для обработки POST-запроса от AI формы
 @app.route("/ask", methods=["POST"])
 def ask():
+    import traceback
+    print("🛠 POST /ask был вызван")
+
     data = request.json
+    print("Полученные данные:", data)
+
     user_message = data.get("message", "")
+    print("📩 user_message:", user_message)
+
+    print("🔑 OpenAI API key начинается с:", openai.api_key[:5])
 
     if not user_message:
         return jsonify({"error": "Нет сообщения"}), 400
@@ -59,12 +66,14 @@ def ask():
             ]
         )
         reply = response.choices[0].message["content"]
+        print(f"🤖 Ответ от OpenAI: {reply}")
         return jsonify({"reply": reply})
     except Exception as e:
         traceback_str = traceback.format_exc()
-        print("❌ Ошибка при обращении к OpenAI API:")
+        print("❌ Произошла ошибка:")
         print(traceback_str)
         return jsonify({"error": str(e), "traceback": traceback_str}), 500
+
 
 
 # Запуск приложения
