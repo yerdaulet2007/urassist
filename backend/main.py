@@ -56,7 +56,7 @@ def ask():
             return jsonify({"error": "Нет сообщения"}), 400
 
         # Новый код с правильным использованием v1/chat/completions
-        response = openai.ChatCompletion.create(
+        response = openai.chat.completions.create(
             model="gpt-3.5-turbo",  # В зависимости от версии используем подходящую модель
             messages=[
                 {"role": "system", "content": "Ты — юридический консультант по законодательству Казахстана. Отвечай ясно и по делу. Не давай советы, если не уверен."},
