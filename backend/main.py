@@ -1,24 +1,49 @@
 import os
 from flask import Flask, request, jsonify, render_template
-import openai  # Используйте openai, а не OpenAI
+import openai
 from flask_cors import CORS
 from dotenv import load_dotenv
 
-# Загружаем переменные окружения из .env файла
+# Загружаем переменные окружения из .env
 load_dotenv()
 
-app = Flask(__name__)
+# Определяем абсолютные пути к папкам templates и static
+BASE_DIR = os.path.abspath(os.path.dirname(__file__))
+TEMPLATES_PATH = os.path.join(BASE_DIR, '..', 'templates')
+STATIC_PATH = os.path.join(BASE_DIR, '..', 'static')
 
-# Разрешаем кросс-доменные запросы
+# Инициализация Flask с указанием путей к шаблонам и статике
+app = Flask(__name__, template_folder=TEMPLATES_PATH, static_folder=STATIC_PATH)
 CORS(app)
 
-# Инициализация OpenAI с использованием API-ключа из переменных окружения
+# Подключение OpenAI API
 openai.api_key = os.getenv("OPENAI_API_KEY")
 
-# Маршрут для обработки POST-запросов на /ask
+# Роут для главной страницы
+@app.route("/", methods=["GET"])
+def home():
+    return render_template("index.html")
+
+# Роут для остальных страниц (если нужно)
+@app.route("/about")
+def about():
+    return render_template("about.html")
+
+@app.route("/calculator")
+def calculator():
+    return render_template("calculator.html")
+
+@app.route("/ai")
+def ai():
+    return render_template("ai.html")
+
+@app.route("/articles")
+def articles():
+    return render_template("articles.html")
+
+# Роут для обработки POST-запроса от AI формы
 @app.route("/ask", methods=["POST"])
 def ask():
-    # Получаем данные из запроса
     data = request.json
     user_message = data.get("message", "")
 
@@ -26,7 +51,6 @@ def ask():
         return jsonify({"error": "Нет сообщения"}), 400
 
     try:
-        # Отправляем запрос к OpenAI API для получения ответа
         response = openai.ChatCompletion.create(
             model="gpt-3.5-turbo",
             messages=[
@@ -34,22 +58,12 @@ def ask():
                 {"role": "user", "content": user_message}
             ]
         )
-
-        # Извлекаем ответ и возвращаем его в формате JSON
         reply = response.choices[0].message["content"]
         return jsonify({"reply": reply})
-
     except Exception as e:
-        # Возвращаем ошибку, если что-то пошло не так
         return jsonify({"error": str(e)}), 500
 
-# Маршрут для домашней страницы
-@app.route("/", methods=["GET"])
-def home():
-    return render_template("index.html")  # Возвращаем HTML страницу из папки templates
-
+# Запуск приложения
 if __name__ == "__main__":
-    # Получаем порт из переменной окружения (для Render) или используем 5000 по умолчанию
     port = int(os.environ.get("PORT", 5000))
-    # Запускаем приложение на всех адресах, чтобы оно было доступно извне
-    app.run(host="0.0.0.0", port=port)
+    app.run(host="0.0.0.0", port=port, debug=True)
