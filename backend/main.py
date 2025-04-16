@@ -4,15 +4,21 @@ from openai import OpenAI
 from flask_cors import CORS
 from dotenv import load_dotenv
 
-load_dotenv()  # загружает переменные из .env
+# Загружаем переменные окружения из .env файла
+load_dotenv()
 
 app = Flask(__name__)
+
+# Разрешаем кросс-доменные запросы
 CORS(app)
 
+# Инициализация клиента OpenAI с использованием API-ключа из переменных окружения
 client = OpenAI(api_key=os.getenv("OPENAI_API_KEY"))
 
+# Маршрут для обработки POST-запросов на /ask
 @app.route("/ask", methods=["POST"])
 def ask():
+    # Получаем данные из запроса
     data = request.json
     user_message = data.get("message", "")
 
@@ -20,6 +26,7 @@ def ask():
         return jsonify({"error": "Нет сообщения"}), 400
 
     try:
+        # Отправляем запрос к OpenAI API для получения ответа
         response = client.chat.completions.create(
             model="gpt-3.5-turbo",
             messages=[
@@ -27,12 +34,17 @@ def ask():
                 {"role": "user", "content": user_message}
             ]
         )
+
+        # Извлекаем ответ и возвращаем его в формате JSON
         reply = response.choices[0].message.content
         return jsonify({"reply": reply})
+
     except Exception as e:
+        # Возвращаем ошибку, если что-то пошло не так
         return jsonify({"error": str(e)}), 500
 
 if __name__ == "__main__":
-    # Render требует запускать на 0.0.0.0 и через порт из переменной окружения
+    # Получаем порт из переменной окружения (для Render) или используем 5000 по умолчанию
     port = int(os.environ.get("PORT", 5000))
+    # Запускаем приложение на всех адресах, чтобы оно было доступно извне
     app.run(host="0.0.0.0", port=port)

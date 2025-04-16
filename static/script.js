@@ -294,7 +294,7 @@ function setLanguage(lang) {
   
     $.ajax({
       type: 'POST',
-      url: 'http://127.0.0.1:5000/ask',
+      url: 'https://urassist.onrender.com/ask',
       data: JSON.stringify({ message: userMessage }),
       contentType: 'application/json',
       success: function(response) {
